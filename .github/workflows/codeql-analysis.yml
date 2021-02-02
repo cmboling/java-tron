@@ -59,9 +59,18 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
-    #- run: |
-    #   make bootstrap
-    #   make release
+    - run: |
+        sudo add-apt-repository ppa:webupd8team/java
+        sudo apt-get update
+        
+        sudo apt-get install oracle-java8-installer
+        sudo update-alternatives --config java
+        
+        cat /etc/environment
+        JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+        echo $JAVA_HOME
+        
+        ./gradlew build
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
